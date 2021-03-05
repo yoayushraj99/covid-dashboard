@@ -14,13 +14,12 @@ class App extends Component {
   componentDidMount() {
     fetch("https://api.covid19api.com/summary")
       .then((response) => response.json())
-      .then((summary) => this.setState({ global: summary.Global, countries: summary.Countries }));
+      .then((summary) => this.setState({ global: summary.Global, countries: summary.Countries }))
+      .catch(err => window.alert("oops! Server not Working. Try again or Come later🙂"))
   }
 
   render() {
-    console.log(this.state)
     const { countries } = this.state;
-    console.log(countries);
 
     return (
       <div className="App">
