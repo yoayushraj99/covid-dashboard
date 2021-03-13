@@ -11,11 +11,17 @@ class App extends Component {
     };
   }
 
+  controller = new AbortController();
+
   componentDidMount() {
-    fetch("https://api.covid19api.com/summary")
+    fetch("https://api.covid19api.com/summary", { signal: this.controller.signal })
       .then((response) => response.json())
       .then((summary) => this.setState({ global: summary.Global, countries: summary.Countries }))
       .catch(err => window.alert("oops! Server not Working. Try again or Come later🙂"))
+  }
+
+  componentWillUnmount() {
+    this.controller.abort();
   }
 
   render() {
