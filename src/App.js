@@ -1,39 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import { CardList } from "./components/card-list/card-list.component";
+import useFetch from './useFetch';
 import "./App.css";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      global: {},
-      countries: []
-    };
-  }
+function App () {
+  // const [global, setGlobal] = useState({});
+  const { data } = useFetch("https://api.covid19api.com/summary");
 
-  controller = new AbortController();
-
-  componentDidMount() {
-    fetch("https://api.covid19api.com/summary", { signal: this.controller.signal })
-      .then((response) => response.json())
-      .then((summary) => this.setState({ global: summary.Global, countries: summary.Countries }))
-      .catch(err => window.alert("oops! Server not Working. Try again or Come later🙂"))
-  }
-
-  componentWillUnmount() {
-    this.controller.abort();
-  }
-
-  render() {
-    const { countries } = this.state;
-
-    return (
-      <div className="App">
+  return (
+    <div className="App">
         <h1>COVID-19 CORONAVIRUS PANDEMIC</h1>
-        <CardList countries={countries} />
-      </div>
-    );
-  }
+        {data ? <CardList countries={data.Countries} />: <div>Loading</div>}
+    </div>
+  );
 }
 
 export default App;
