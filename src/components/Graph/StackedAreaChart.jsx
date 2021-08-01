@@ -13,7 +13,7 @@ import {
 } from "recharts";
 
 const StackedAreaChart = () => {
-  const { data } = useFetch(
+  const { data, error } = useFetch(
     "https://corona.lmao.ninja/v3/covid-19/historical/all?lastdays=all"
   );
   if (data) {
@@ -64,6 +64,7 @@ const StackedAreaChart = () => {
       </div>
     );
   } else {
+    console.log(error);
     return <CircularProgress />;
   }
 };

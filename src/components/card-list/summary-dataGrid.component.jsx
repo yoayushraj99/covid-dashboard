@@ -4,7 +4,9 @@ import { CircularProgress } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 
 export const SummaryDataGrid = () => {
-  const { data } = useFetch("https://corona.lmao.ninja/v3/covid-19/countries");
+  const { data, error } = useFetch(
+    "https://corona.lmao.ninja/v3/covid-19/countries"
+  );
   if (data) {
     const formatedData = data.map((country, index) => {
       return {
@@ -54,6 +56,7 @@ export const SummaryDataGrid = () => {
       </div>
     );
   } else {
+    console.log(error);
     return <CircularProgress />;
   }
 };
