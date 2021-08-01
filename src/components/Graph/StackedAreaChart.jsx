@@ -21,8 +21,9 @@ const StackedAreaChart = () => {
     const dateSeries = Object.keys(cases);
     const formatedData = [];
     for (let i = 0; i < dateSeries.length; i++) {
+      const date = new Date(dateSeries[i]);
       formatedData.push({
-        date: dateSeries[i],
+        date: date.toDateString().slice(3),
         cases: cases[dateSeries[i]],
         deaths: deaths[dateSeries[i]],
         recovered: recovered[dateSeries[i]],
