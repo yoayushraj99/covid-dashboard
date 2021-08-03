@@ -10,6 +10,7 @@ import {
   LineChart,
   Legend,
   Line,
+  ResponsiveContainer,
 } from "recharts";
 
 const StackedAreaChart = () => {
@@ -31,37 +32,42 @@ const StackedAreaChart = () => {
     }
 
     return (
-      <div className="d-flex justify-content-center">
-        <LineChart
-          width={1150}
-          height={500}
-          data={formatedData}
-          margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
-        >
-          <XAxis dataKey="date" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Legend verticalAlign="top" height={36} />
-          <Line
-            name="Total Cases"
-            type="monotone"
-            dataKey="cases"
-            stroke="#f96d00"
-          />
-          <Line
-            name="Total Recovered"
-            type="monotone"
-            dataKey="recovered"
-            stroke="#66DE93"
-          />
-          <Line
-            name="Total Deaths"
-            type="monotone"
-            dataKey="deaths"
-            stroke="#D83A56"
-          />
-        </LineChart>
+      <div
+        className="d-flex justify-content-center"
+        style={{ width: "100%", height: 360 }}
+      >
+        <ResponsiveContainer>
+          <LineChart
+            width={1150}
+            height={500}
+            data={formatedData}
+            margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
+          >
+            <XAxis dataKey="date" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend verticalAlign="top" height={36} />
+            <Line
+              name="Total Cases"
+              type="monotone"
+              dataKey="cases"
+              stroke="#f96d00"
+            />
+            <Line
+              name="Total Recovered"
+              type="monotone"
+              dataKey="recovered"
+              stroke="#66DE93"
+            />
+            <Line
+              name="Total Deaths"
+              type="monotone"
+              dataKey="deaths"
+              stroke="#D83A56"
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     );
   } else {
